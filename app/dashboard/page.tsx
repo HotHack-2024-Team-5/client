@@ -1,5 +1,6 @@
 // pages/Dashboard.tsx
 
+import StaysChart from "@/components/StaysChart";
 import PageLayout from "@/components/pageLayout";
 import { Datepicker } from "flowbite-react";
 import React from "react";
@@ -45,6 +46,7 @@ const Dashboard: React.FC = () => {
           Submit
         </button>
       </div>
+      <StaysChart />
     </PageLayout>
   );
 };
