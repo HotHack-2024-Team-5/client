@@ -26,11 +26,9 @@ export default function Home() {
         <button className="bg-[#BC6C25] text-white font-bold py-2 px-4 rounded mb-12 text-2xl" onClick={openSheet}>
 Download CSV Template</button>     
 <h1 className="text-4xl text-[#606C38] font-bold mb-2">Step 2</h1>
-<form>
-<input type="file" title="Select your file"/>
-{/* <label htmlFor="file-input" className="mb-12 cursor-pointer bg-[#BC6C25] text-white font-bold mr-12 py-2 px-4 rounded text-2xl">
-        Select File
-      </label> */}
+<form action="http://localhost:3001/csv/upload" method="POST" encType="multipart/form-data">
+<input type="file" name="file" title="Select your file"/>
+
 <button type="submit" className="bg-[#BC6C25] cursor-pointer text-white font-bold py-2 px-4 rounded mb-12 text-2xl">
 Submit </button>
 </form>     
