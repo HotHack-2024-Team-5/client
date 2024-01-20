@@ -87,7 +87,7 @@ const Dashboard: React.FC = () => {
           Submit
         </button>
       </div>
-      <StaysChart />
+      <StaysChart dateFrom={fromDate} dateTo={toDate} cityIds={[]} />
     </PageLayout>
   );
 };

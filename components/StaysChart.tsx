@@ -5,10 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart } from 'recharts';
 
 
-export default function StaysChart() {
+export default function StaysChart(props: { cityIds: string[], dateFrom: string, dateTo: string}) {
 
-    const staysData = useStaysData(['fd5d48df-dd66-4839-8464-c079af1c2b43'],'2020-01-20','2030-01-21');
-
+    const staysData = useStaysData(props.cityIds, props.dateFrom, props.dateTo);
 
     return (
         <div style={{ height: 500 }}>

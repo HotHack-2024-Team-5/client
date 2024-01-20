@@ -58,7 +58,7 @@ const [staysData, setStaysData] = useState(data);
         };
     
         fetchData();
-    }, []);// city, dateTo, dateFrom
+    }, [cityIds, dateFrom, dateTo]);
 
     return staysData;
 }
