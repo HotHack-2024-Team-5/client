@@ -9,10 +9,14 @@ import OptionTypeBase from "react-select";
 
 type SelectRoomType = { value: string; label: string };
 
+const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+
 const Dashboard: React.FC = () => {
   const [city, setCity] = React.useState<string>("");
-  const [fromDate, setFromDate] = React.useState<Date>(new Date());
-  const [toDate, setToDate] = React.useState<Date>(new Date());
+  const [fromDate, setFromDate] = React.useState<string>(
+    formatDate(new Date())
+  );
+  const [toDate, setToDate] = React.useState<string>(formatDate(new Date()));
   const [roomTypes, setRoomTypes] = React.useState<readonly SelectRoomType[]>(
     []
   );
@@ -59,16 +63,19 @@ const Dashboard: React.FC = () => {
           <div className="flex">
             <p className="p-2">From:</p>
             <Datepicker
-              value={fromDate.toISOString()}
-              onSelectedDateChanged={(newDate) => setFromDate(newDate)}
+              value={fromDate}
+              onSelectedDateChanged={(newDate) =>
+                setFromDate(formatDate(newDate))
+              }
             />
           </div>
           <div className="flex">
             <p className="p-2"> To:</p>{" "}
             <Datepicker
-              value={toDate.toISOString()}
-              onSelectedDateChanged={(newDate) => setToDate(newDate)}
-              onChange={(e) => console.log(e)}
+              value={toDate}
+              onSelectedDateChanged={(newDate) =>
+                setToDate(formatDate(newDate))
+              }
             />
           </div>
         </div>
