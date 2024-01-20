@@ -1,22 +1,33 @@
-// @ts-nocheck
 "use client";
 import PageLayout from "@/components/pageLayout";
 import { Datepicker } from "flowbite-react";
 import React from "react";
 import Select from "react-select";
+import OptionTypeBase from "react-select";
+
+type SelectRoomType = { value: string; label: string };
 
 const Dashboard: React.FC = () => {
   const [city, setCity] = React.useState<string>("");
   const [fromDate, setFromDate] = React.useState<Date>(new Date());
   const [toDate, setToDate] = React.useState<Date>(new Date());
+  const [roomTypes, setRoomTypes] = React.useState<readonly SelectRoomType[]>(
+    []
+  );
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log("City:", city);
+    console.log("From Date:", fromDate);
+    console.log("To Date:", toDate);
+    console.log("Room Type:", roomTypes);
+  };
 
-  const options = [
+  const options: SelectRoomType[] = [
     { value: "King", label: "King" },
     { value: "Suite", label: "Suite" },
     { value: "Twin", label: "Twin" },
   ];
+
   return (
     <PageLayout>
       <p className="text-3xl pt-10 font-bold text-[#606C38]">
@@ -35,30 +46,34 @@ const Dashboard: React.FC = () => {
           placeholder="City"
           className="mr-2 p-2 rounded outline-[#283618] outline-1 outline"
         />
-        <Select className="p-2 mr-2" options={options} isMulti />
+        <Select
+          className="p-2 mr-2"
+          options={options}
+          isMulti
+          onChange={setRoomTypes}
+          value={roomTypes}
+        />
         <div className="flex space-x-3">
           <div className="flex">
             <p className="p-2">From:</p>
             <Datepicker
-              value={fromDate}
+              value={fromDate.toISOString()}
               onSelectedDateChanged={(newDate) => setFromDate(newDate)}
-              dateFormat="yyyy-MM-dd"
             />
           </div>
           <div className="flex">
             <p className="p-2"> To:</p>{" "}
             <Datepicker
-              value={toDate}
+              value={toDate.toISOString()}
               onSelectedDateChanged={(newDate) => setToDate(newDate)}
               onChange={(e) => console.log(e)}
-              dateFormat="yyyy-MM-dd"
             />
           </div>
         </div>
         <button
           type="button"
           className="bg-[#DDA15E] hover:bg-[#BC6C25] text-white px-10 rounded mx-5"
-          //   submit={handleSubmit}
+          onClick={handleSubmit}
         >
           Submit
         </button>
