@@ -4,12 +4,10 @@ import { useStaysData } from '@/api';
 import React, { useEffect, useState } from 'react';
 import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart } from 'recharts';
 
-const demoUrl = 'https://codesandbox.io/s/simple-line-chart-kec3v';
 
-export default function Dashboard() {
+export default function StaysChart(props: { cityIds: string[], dateFrom: string, dateTo: string}) {
 
-    const staysData = useStaysData(['city1', 'city2', 'city3'],'2024-01-20','2024-01-21');
-
+    const staysData = useStaysData(props.cityIds, props.dateFrom, props.dateTo);
 
     return (
         <div style={{ height: 500 }}>
