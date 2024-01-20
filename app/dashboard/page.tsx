@@ -3,7 +3,7 @@ import PageLayout from "@/components/pageLayout";
 import { Datepicker } from "flowbite-react";
 import React from "react";
 import Select from "react-select";
-import OptionTypeBase from "react-select";
+
 
 type SelectRoomType = { value: string; label: string };
 
