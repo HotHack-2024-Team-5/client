@@ -5,9 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart } from 'recharts';
 
 
-export default function StaysChart(props: { cityIds: string[], dateFrom: string, dateTo: string}) {
+export default function StaysChart(props: { cityIds: string[], dateFrom: string, dateTo: string, roomTypes: readonly { value: string }[]}) {
 
     const staysData = useStaysData(props.cityIds, props.dateFrom, props.dateTo);
+
+    const showKing = props.roomTypes.find((roomType) => roomType.value === 'King') || props.roomTypes.length === 0;
+    const showTwin = props.roomTypes.find((roomType) => roomType.value === 'Twin') || props.roomTypes.length === 0;
+    const showSuite = props.roomTypes.find((roomType) => roomType.value === 'Suite') || props.roomTypes.length === 0;
 
     return (
         <div style={{ height: 500 }}>
@@ -28,9 +32,9 @@ export default function StaysChart(props: { cityIds: string[], dateFrom: string,
           <YAxis  allowDecimals={false}/>
           <Tooltip />
           <Legend />
-          <Bar dataKey="king" stackId="1" fill="#DDA15E" />
-          <Bar dataKey="twin" stackId="1" fill="#CD822B" />
-          <Bar dataKey="suite" stackId="1" fill="#955E20" />
+          {showKing ? <Bar dataKey="king" stackId="1" fill="#DDA15E" /> : null}
+          {showTwin ? <Bar dataKey="twin" stackId="1" fill="#CD822B" /> : null}
+          {showSuite ? <Bar dataKey="suite" stackId="1" fill="#955E20" /> : null}
         </BarChart>
        </ResponsiveContainer>
        </div>
