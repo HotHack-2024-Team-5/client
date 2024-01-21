@@ -45,9 +45,7 @@ export default function Home() {
     <PageLayout>
       <main className="flex pt-10 flex-col items-center justify-center">
         <div className="flex items-center">
-          <h1 className="text-5xl text-left text-[#52796F] font-extrabold mt-6">
-            Home
-          </h1>
+          <p className="text-6xl py-10 font-bold text-[#2F3E46]">Home</p>
         </div>
 
         <div className="mt-6 text-2xl text-center">
@@ -56,16 +54,16 @@ export default function Home() {
         </div>
 
         <div className="flex items-center flex-col py-8 ">
-          <h1 className="text-4xl text-[#52796F] font-extrabold mb-2">
+          <h1 className="text-4xl text-[#2F3E46] font-extrabold mb-2">
             Step 1
           </h1>
           <button
-            className="bg-[#CAD2C5] text-white font-bold py-2 px-4 rounded mb-12 text-2xl"
+            className="bg-[#CAD2C5] hover:bg-[#2F3E46] hover:text-[#CAD2C5] text-[#52796F] font-bold py-2 px-4 rounded mb-12 text-2xl"
             onClick={openSheet}
           >
             Download CSV Template
           </button>
-          <h1 className="text-4xl text-[#52796F] font-bold mb-2">Step 2</h1>
+          <h1 className="text-4xl text-[#2F3E46] font-bold mb-2">Step 2</h1>
 
           <form
             className="flex flex-col justify-center"
@@ -77,18 +75,18 @@ export default function Home() {
               name="name"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              className="mb-4"
+              className="mb-4 text-[#2F3E46]"
             />
             <input
               name="file"
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              className="w-full text-gray-900 bg-gray-50"
               id="file_input"
               type="file"
             />
             {submit ? <p>File submitted successfully</p> : null}
             <button
               type="submit"
-              className="bg-[#CAD2C5] items-center cursor-pointer text-white font-bold py-2 px-4 rounded mb-12 mt-6 text-2xl"
+              className="bg-[#CAD2C5] hover:bg-[#2F3E46] hover:text-[#CAD2C5] items-center cursor-pointer text-[#52796F] font-bold py-2 px-4 rounded mb-12 mt-6 text-2xl"
             >
               Submit{" "}
             </button>
