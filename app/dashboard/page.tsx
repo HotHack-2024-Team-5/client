@@ -9,18 +9,18 @@ import { CitiesDataType, usecitiesData } from "@/api/index";
 
 type SelectDataType = { value: string; label: string };
 
-const formatDate = (date: Date) => date.toLocaleDateString().slice(0, 10);
+const formatDate = (date: Date) => date.toISOString().slice(0, 10);
 
 const Dashboard: React.FC = () => {
   const citiesData = usecitiesData();
 
   const [cities, setCities] = React.useState<readonly SelectDataType[]>([]);
-  console.log("cities", cities);
+
   const [fromDate, setFromDate] = React.useState<string>(
     formatDate(new Date())
   );
   const [toDate, setToDate] = React.useState<string>("2025-12-31");
-  console.log(toDate);
+
   const [roomTypes, setRoomTypes] = React.useState<readonly SelectDataType[]>(
     []
   );
@@ -35,8 +35,6 @@ const Dashboard: React.FC = () => {
     value: city.id,
     label: city.name,
   }));
-
-  console.log({ fromDate, toDate });
 
   return (
     <PageLayout>
