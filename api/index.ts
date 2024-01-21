@@ -60,7 +60,7 @@ export function useStaysData(
     };
 
     fetchData();
-  }, []); // city, dateTo, dateFrom
+  }, [cityIds, dateFrom, dateTo]);
 
   return staysData;
 }
