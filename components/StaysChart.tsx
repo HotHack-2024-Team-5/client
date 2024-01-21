@@ -44,6 +44,7 @@ export default function StaysChart(props: {
             left: 20,
             bottom: 5,
           }}
+          barCategoryGap={0}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
