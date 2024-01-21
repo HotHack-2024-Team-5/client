@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
         dateFrom={fromDate}
         dateTo={toDate}
         cityIds={cities.map((city) => city.value)}
-        roomTypes={[]}
+        roomTypes={roomTypes}
       />
     </PageLayout>
   );
