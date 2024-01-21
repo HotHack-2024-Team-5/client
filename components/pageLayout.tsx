@@ -8,10 +8,12 @@ interface PageLayoutProps {
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen min-w-screen bg-[#FEFAE0] flex flex-col items-left p-8">
+    <div>
       <Navigation />
-      {children}
-      <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.js" />
+      <div className="min-h-screen min-w-screen bg-[#2F3E46] text-[#CAD2C5] flex flex-col items-left p-8">
+        {children}
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.js" />
+      </div>
     </div>
   );
 };
