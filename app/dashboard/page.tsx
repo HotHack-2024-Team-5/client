@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
   const [fromDate, setFromDate] = React.useState<string>(
     formatDate(new Date())
   );
-  const [toDate, setToDate] = React.useState<string>("2025-12-31");
+  const [toDate, setToDate] = React.useState<string>("2024-12-31");
 
   const [roomTypes, setRoomTypes] = React.useState<readonly SelectDataType[]>(
     []

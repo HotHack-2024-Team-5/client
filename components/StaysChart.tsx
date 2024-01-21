@@ -26,6 +26,7 @@ export default function StaysChart(props: { cityIds: string[], dateFrom: string,
             left: 20,
             bottom: 5,
           }}
+          barCategoryGap={0}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
