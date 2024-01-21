@@ -3,7 +3,7 @@
 import PageLayout from "@/components/pageLayout";
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import axios from "axios";
 
 const openSheet = () => {
@@ -12,6 +12,7 @@ const openSheet = () => {
 
 export default function Home() {
   const [inputValue,setInputValue] = useState('');
+  const [submit, setSubmit] = useState(false);
   const router = useRouter();
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -23,9 +24,23 @@ export default function Home() {
     console.log(formData);
     setInputValue('');
     // const textClear= () =>{e.target.input}
-
+   setSubmit(true);
     // action="http://localhost:3001/csv/upload" method="POST" encType="multipart/form-data"
   }
+
+  useEffect(()=>{
+    if (!submit) {
+      return;
+    }
+
+    const timeout = setTimeout(() => { setSubmit(false) }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+    }
+  },[submit])
+
+  
 
   return (
     <PageLayout>
@@ -51,6 +66,7 @@ Download CSV Template</button>
 <input type="text" name="name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}
 />
 <input name="file" className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"/>
+{submit? <p>File submitted successfully</p>:null }
 <button type="submit" className="bg-[#BC6C25] items-center cursor-pointer text-white font-bold py-2 px-4 rounded mb-12 mt-6 text-2xl">
 Submit </button>
 </form>     
