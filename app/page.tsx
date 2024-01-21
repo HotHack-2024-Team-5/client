@@ -47,7 +47,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center">
       <div className="flex items-center">
         <h1 className="text-5xl text-center text-[#606C38] font-extrabold mt-6">
-          Hello Fred!
+          Hello!
         </h1>
       </div>
 
@@ -63,7 +63,7 @@ Download CSV Template</button>
 <h1 className="text-4xl text-[#606C38] font-bold mb-2">Step 2</h1>
 
 <form className="flex flex-col justify-center" onSubmit={onFormSubmit}>
-<input type="text" name="name" value={inputValue} onChange={(e) => setInputValue(e.target.value)}
+<input type="text" required name="name" value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="mb-4"
 />
 <input name="file" className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"/>
 {submit? <p>File submitted successfully</p>:null }
