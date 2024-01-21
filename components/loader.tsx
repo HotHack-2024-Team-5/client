@@ -14,7 +14,7 @@ return (
   loading={true}
   cssOverride={override}
   speedMultiplier={1}
-  color="#d67436"
+  color="#3e5e56"
   />
 
 )};

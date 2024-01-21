@@ -20,6 +20,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const onFormSubmit = async (e: FormEvent) => {
+    e.preventDefault()
     setLoading(true);
 
     // @ts-ignore
@@ -30,7 +31,8 @@ export default function Home() {
     setInputValue('');
     // const textClear= () =>{e.target.input}
    setSubmit(true);
-   setLoading(false)
+   setLoading(false);
+   setTimeout(() => { window.location.reload() }, 750);
     // action="http://localhost:3001/csv/upload" method="POST" encType="multipart/form-data"
   }
   const override: CSSProperties = {
