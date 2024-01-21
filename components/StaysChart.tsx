@@ -19,8 +19,19 @@ export default function StaysChart(props: {
   cityIds: string[];
   dateFrom: string;
   dateTo: string;
+  roomTypes: readonly { value: string }[];
 }) {
   const staysData = useStaysData(props.cityIds, props.dateFrom, props.dateTo);
+
+  const showKing =
+    props.roomTypes.find((roomType) => roomType.value === "King") ||
+    props.roomTypes.length === 0;
+  const showTwin =
+    props.roomTypes.find((roomType) => roomType.value === "Twin") ||
+    props.roomTypes.length === 0;
+  const showSuite =
+    props.roomTypes.find((roomType) => roomType.value === "Suite") ||
+    props.roomTypes.length === 0;
 
   return (
     <div style={{ height: 500 }}>
@@ -41,9 +52,11 @@ export default function StaysChart(props: {
           <YAxis allowDecimals={false} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="king" stackId="1" fill="#52796F" />
-          <Bar dataKey="twin" stackId="1" fill="#84A98C" />
-          <Bar dataKey="suite" stackId="1" fill="#CAD2C5" />
+          {showKing ? <Bar dataKey="king" stackId="1" fill="#52796F" /> : null}
+          {showTwin ? <Bar dataKey="twin" stackId="1" fill="#84A98C" /> : null}
+          {showSuite ? (
+            <Bar dataKey="suite" stackId="1" fill="#CAD2C5" />
+          ) : null}
         </BarChart>
       </ResponsiveContainer>
     </div>
