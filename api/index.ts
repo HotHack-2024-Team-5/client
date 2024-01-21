@@ -66,7 +66,7 @@ export function useStaysData(
 }
 
 //BELOW IS THE CITIES DATA
-type CitiesDataType = {
+export type CitiesDataType = {
   id: string;
   name: string;
 };

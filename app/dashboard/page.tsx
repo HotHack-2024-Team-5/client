@@ -5,34 +5,38 @@ import PageLayout from "@/components/pageLayout";
 import { Datepicker } from "flowbite-react";
 import React from "react";
 import Select from "react-select";
+import { CitiesDataType, usecitiesData } from "@/api/index";
 
+type SelectDataType = { value: string; label: string };
 
-type SelectRoomType = { value: string; label: string };
-
-const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+const formatDate = (date: Date) => date.toLocaleDateString().slice(0, 10);
 
 const Dashboard: React.FC = () => {
-  const [city, setCity] = React.useState<string>("");
+  const citiesData = usecitiesData();
+
+  const [cities, setCities] = React.useState<readonly SelectDataType[]>([]);
+  console.log("cities", cities);
   const [fromDate, setFromDate] = React.useState<string>(
     formatDate(new Date())
   );
-  const [toDate, setToDate] = React.useState<string>(formatDate(new Date()));
-  const [roomTypes, setRoomTypes] = React.useState<readonly SelectRoomType[]>(
+  const [toDate, setToDate] = React.useState<string>("2025-12-31");
+  console.log(toDate);
+  const [roomTypes, setRoomTypes] = React.useState<readonly SelectDataType[]>(
     []
   );
 
-  const handleSubmit = () => {
-    console.log("City:", city);
-    console.log("From Date:", fromDate);
-    console.log("To Date:", toDate);
-    console.log("Room Type:", roomTypes);
-  };
-
-  const options: SelectRoomType[] = [
+  const options: SelectDataType[] = [
     { value: "King", label: "King" },
     { value: "Suite", label: "Suite" },
     { value: "Twin", label: "Twin" },
   ];
+
+  const citiesOptions = citiesData.map((city: CitiesDataType) => ({
+    value: city.id,
+    label: city.name,
+  }));
+
+  console.log({ fromDate, toDate });
 
   return (
     <PageLayout>
@@ -45,12 +49,13 @@ const Dashboard: React.FC = () => {
       </p>
       <div className="lg:flex space-x-5">
         <p className="text-3xl font-bold text-[#283618] mr-5">Search by:</p>
-        <input
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          type="text"
+        <Select
+          value={cities}
+          onChange={setCities}
+          isMulti
           placeholder="City"
-          className="mr-2 p-2 rounded outline-[#283618] outline-1 outline"
+          options={citiesOptions}
+          className="mr-2 p-2"
         />
         <Select
           className="p-2 mr-2"
@@ -63,7 +68,6 @@ const Dashboard: React.FC = () => {
           <div className="flex">
             <p className="p-2">From:</p>
             <Datepicker
-              value={fromDate}
               onSelectedDateChanged={(newDate) =>
                 setFromDate(formatDate(newDate))
               }
@@ -72,22 +76,19 @@ const Dashboard: React.FC = () => {
           <div className="flex">
             <p className="p-2"> To:</p>{" "}
             <Datepicker
-              value={toDate}
               onSelectedDateChanged={(newDate) =>
                 setToDate(formatDate(newDate))
               }
+              defaultDate={new Date(toDate)}
             />
           </div>
         </div>
-        <button
-          type="button"
-          className="bg-[#DDA15E] hover:bg-[#BC6C25] text-white px-10 rounded mx-5"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
       </div>
-      <StaysChart dateFrom={fromDate} dateTo={toDate} cityIds={[]} />
+      <StaysChart
+        dateFrom={fromDate}
+        dateTo={toDate}
+        cityIds={cities.map((city) => city.value)}
+      />
     </PageLayout>
   );
 };
