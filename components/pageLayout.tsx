@@ -15,9 +15,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
           {children}
           <Script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.js" />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 text-center py-5 text-[#CAD2C5]">
-          Made with ❤️ by Team 5
-        </div>
       </div>
     </div>
   );
