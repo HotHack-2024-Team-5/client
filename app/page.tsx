@@ -1,13 +1,87 @@
+"use client";
 
+import StaysChart from "@/components/StaysChart";
+import PageLayout from "@/components/pageLayout";
+import { Datepicker } from "flowbite-react";
+import React from "react";
+import Select from "react-select";
+import { CitiesDataType, usecitiesData } from "@/api/index";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Welcome Team 5!
-        </p>
-      </div>
-    </main>
+type SelectDataType = { value: string; label: string };
+
+const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+
+const Dashboard: React.FC = () => {
+  const citiesData = usecitiesData();
+
+  const [cities, setCities] = React.useState<readonly SelectDataType[]>([]);
+
+  const [fromDate, setFromDate] = React.useState<string>(
+    formatDate(new Date())
   );
-}
+  const [toDate, setToDate] = React.useState<string>("2025-12-31");
+
+  const [roomTypes, setRoomTypes] = React.useState<readonly SelectDataType[]>(
+    []
+  );
+
+  const options: SelectDataType[] = [
+    { value: "King", label: "King" },
+    { value: "Suite", label: "Suite" },
+    { value: "Twin", label: "Twin" },
+  ];
+
+  const citiesOptions = citiesData.map((city: CitiesDataType) => ({
+    value: city.id,
+    label: city.name,
+  }));
+
+  return (
+    <PageLayout>
+      <div className="mx-10 py-10 pl-5">
+        <p className="text-6xl py-10 font-bold text-[#52796F]">Dashboard</p>
+        {/* <p className="text-xl pb-10 text-[#52796F]">
+          Unleashing data analysis for essential tour expenses like flights,
+          hotels, buses, and merchandise.
+        </p> */}
+        <div className="lg:flex space-x-5">
+          <Select
+            value={cities}
+            onChange={setCities}
+            isMulti
+            placeholder="City"
+            options={citiesOptions}
+            className="bg-[#354F52] text-[#CAD2C5]"
+          />
+          <Select
+            className="bg-[#354F52] text-[#CAD2C5]"
+            options={options}
+            isMulti
+            onChange={setRoomTypes}
+            value={roomTypes}
+            placeholder={"Room Type"}
+          />
+          <p className="text-[#52796F] mt-2 fond-bold">From:</p>
+          <Datepicker
+            onSelectedDateChanged={(newDate) =>
+              setFromDate(formatDate(newDate))
+            }
+          />
+
+          <p className="text-[#52796F] mt-2 fond-bold"> To:</p>
+          <Datepicker
+            onSelectedDateChanged={(newDate) => setToDate(formatDate(newDate))}
+            defaultDate={new Date(toDate)}
+          />
+        </div>
+      </div>
+      <StaysChart
+        dateFrom={fromDate}
+        dateTo={toDate}
+        cityIds={cities.map((city) => city.value)}
+      />
+    </PageLayout>
+  );
+};
+
+export default Dashboard;
