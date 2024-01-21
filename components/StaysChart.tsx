@@ -47,16 +47,11 @@ export default function StaysChart(props: {
           barCategoryGap={0}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="date"
-            label={{ value: "Date", position: "insideBottom", fill: "#CAD2C5" }}
-            tick={{ fill: "#CAD2C5" }}
-            interval={100}
-          />
-          <YAxis allowDecimals={false} />
+          <XAxis dataKey="date" tick={{ fill: "#2F3E46" }} interval={80} />
+          <YAxis allowDecimals={false} tick={{ fill: "#2F3E46" }} />
           <Tooltip />
           <Legend />
-          {showKing ? <Bar dataKey="king" stackId="1" fill="#52796F" /> : null}
+          {showKing ? <Bar dataKey="king" stackId="1" fill="#2F3E46" /> : null}
           {showTwin ? <Bar dataKey="twin" stackId="1" fill="#84A98C" /> : null}
           {showSuite ? (
             <Bar dataKey="suite" stackId="1" fill="#CAD2C5" />

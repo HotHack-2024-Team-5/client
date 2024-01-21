@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from "react";
-
-const data = [
-  {
-    date: "2024-01-20",
-    king: 3,
-    twin: 2,
-    suite: 1,
-  },
-  {
-    date: "2024-01-21",
-    king: 5,
-    twin: 2,
-    suite: 0,
-  },
-  {
-    date: "2024-01-22",
-    king: 3,
-    twin: 6,
-    suite: 0,
-  },
-  {
-    date: "2024-01-32",
-    king: 0,
-    twin: 0,
-    suite: 0,
-  },
-];
+import { useEffect, useState } from "react";
 
 export function useStaysData(
   cityIds: string[],
   dateFrom: string,
   dateTo: string
 ) {
-  const [staysData, setStaysData] = useState(data);
+  const [staysData, setStaysData] = useState([]);
 
   const serverUrl = "https://hothack-team5-server.vercel.app";
 
