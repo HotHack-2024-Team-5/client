@@ -1,8 +1,11 @@
 "use client";
 import PageLayout from "@/components/pageLayout";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState, useEffect } from "react";
+import Link from "next/link";
+import { FormEvent, useState, useEffect, CSSProperties } from "react";
 import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
+import Loader from "@/components/loader";
 
 const openSheet = () => {
   window.open(
@@ -14,32 +17,34 @@ const openSheet = () => {
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const onFormSubmit = (e: FormEvent) => {
+  const onFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     // @ts-ignore
     const formData = new FormData(e.target);
-    axios.post("https://hothack-team5-server.vercel.app/csv/upload", formData);
+    await axios.post(
+      "https://hothack-team5-server.vercel.app/csv/upload",
+      formData
+    );
+
+    console.log(formData);
     setInputValue("");
     // const textClear= () =>{e.target.input}
     setSubmit(true);
+    setLoading(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 750);
     // action="http://localhost:3001/csv/upload" method="POST" encType="multipart/form-data"
   };
-
-  useEffect(() => {
-    if (!submit) {
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setSubmit(false);
-    }, 3000);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [submit]);
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
 
   return (
     <PageLayout>
@@ -76,6 +81,7 @@ export default function Home() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               className="mb-4 text-[#2F3E46]"
+              placeholder="Insert tour name"
             />
             <input
               name="file"
@@ -84,6 +90,7 @@ export default function Home() {
               type="file"
             />
             {submit ? <p>File submitted successfully</p> : null}
+            {loading && <Loader />}
             <button
               type="submit"
               className="bg-[#CAD2C5] hover:bg-[#2F3E46] hover:text-[#CAD2C5] items-center cursor-pointer text-[#52796F] font-bold py-2 px-4 rounded mb-12 mt-6 text-2xl"
